@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-//import s
+import ErrorMessage from './ErrorMessage';
 
 class App extends React.Component {
 
@@ -18,17 +18,17 @@ class App extends React.Component {
     }
 
     render() {
+        if (this.state.errorMessage)  {
+            return <ErrorMessage errorMessage={this.state.errorMessage}/>;
+        }
         if (this.state.lat) {
             return(
                 <div>
                     lat:  {this.state.lat} , lon: {this.state.lon}
                 </div>
             );
-        } else if (this.state.errorMessage)  {
-            return <div> error : {this.state.errorMessage}</div>;
-        } else {
-            return <div>Loading....</div>;
         }
+        return <div> Loading ...</div>;
     }
 }
 ReactDom.render(<App />, document.querySelector('#root'));
